@@ -13,21 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WPF6Fundamentals
+namespace WPF6Fundamentals.Control
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Логика взаимодействия для HeaderControl.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class HeaderControl : UserControl
     {
-        public MainWindow()
+        public HeaderControl()
         {
             InitializeComponent();
-        }
-
-        private void btnAddCustomer_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }
