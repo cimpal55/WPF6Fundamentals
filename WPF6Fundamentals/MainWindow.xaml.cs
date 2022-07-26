@@ -24,10 +24,5 @@ namespace WPF6Fundamentals
         {
             InitializeComponent();
         }
-
-        private void btnAddCustomer_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }
