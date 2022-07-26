@@ -24,15 +24,5 @@ namespace WPF6Fundamentals.View
         {
             await _viewModel.LoadAsync();
         }
-
-        private void btnMoveNavigation_Click(object sender, RoutedEventArgs e)
-        {
-            _viewModel.MoveNavigation();
-        }
-        private void btnAddCustomer_Click(object sender, RoutedEventArgs e)
-        {
-            _viewModel.Add();
-        }
-
     }
 }

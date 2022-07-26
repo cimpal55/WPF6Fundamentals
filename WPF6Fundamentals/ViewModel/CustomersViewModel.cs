@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using WPF6Fundamentals.Command;
 using WPF6Fundamentals.Data;
 using WPF6Fundamentals.Model;
 using static WPF6Fundamentals.Data.CustomerDataProvider;
@@ -17,6 +18,9 @@ namespace WPF6Fundamentals.ViewModel
         public CustomersViewModel(ICustomerDataProvider customerDataProvider)
         {
             _customerDataProvider = customerDataProvider;
+            AddCommand = new DelegateCommand(Add);
+            MoveNavigationCommand = new DelegateCommand(MoveNavigation);
+            DeleteCommand = new DelegateCommand(Delete, CanDelete);
         }
 
         public ObservableCollection<CustomerItemViewModel> Customers { get; } = new();
@@ -28,6 +32,7 @@ namespace WPF6Fundamentals.ViewModel
             {
                 _selectedCustomer = value;
                 RaisePropertyChanged();
+                DeleteCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -40,6 +45,10 @@ namespace WPF6Fundamentals.ViewModel
                 RaisePropertyChanged();
             }
         }
+
+        public DelegateCommand AddCommand { get; }
+        public DelegateCommand MoveNavigationCommand { get; }
+        public DelegateCommand DeleteCommand { get; }
         public async Task LoadAsync()
         {
             if (Customers.Any())
@@ -54,20 +63,31 @@ namespace WPF6Fundamentals.ViewModel
                 }
             }
         }
-        internal void Add()
+        private void Add(object? parameter)
         {
             var customer = new Customer { FirstName = "New" };
             var viewModel = new CustomerItemViewModel(customer);
             Customers.Add(viewModel);
             SelectedCustomer = viewModel;
         }
-        internal void MoveNavigation()
+        private void MoveNavigation(object? parameter)
             {
             NavigationSide = NavigationSide == NavigationSide.Left
               ? NavigationSide.Right
               : NavigationSide.Left;
             }
+        private void Delete(object? parameter)
+        {
+            if(SelectedCustomer != null)
+            {
+                Customers.Remove(SelectedCustomer);
+                SelectedCustomer = null;
+            }
         }
+
+        private bool CanDelete(object? parameter) => SelectedCustomer is not null;
+
+    }
     public enum NavigationSide
     {
         Left,
