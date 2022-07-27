@@ -32,6 +32,7 @@ namespace WPF6Fundamentals.ViewModel
             {
                 _selectedCustomer = value;
                 RaisePropertyChanged();
+                RaisePropertyChanged(nameof(IsCustomerSelected));
                 DeleteCommand.RaiseCanExecuteChanged();
             }
         }
@@ -45,7 +46,7 @@ namespace WPF6Fundamentals.ViewModel
                 RaisePropertyChanged();
             }
         }
-
+        public bool IsCustomerSelected => SelectedCustomer != null;
         public DelegateCommand AddCommand { get; }
         public DelegateCommand MoveNavigationCommand { get; }
         public DelegateCommand DeleteCommand { get; }
