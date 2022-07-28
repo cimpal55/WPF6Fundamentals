@@ -50,7 +50,7 @@ namespace WPF6Fundamentals.ViewModel
         public DelegateCommand AddCommand { get; }
         public DelegateCommand MoveNavigationCommand { get; }
         public DelegateCommand DeleteCommand { get; }
-        public async Task LoadAsync()
+        public async override Task LoadAsync()
         {
             if (Customers.Any())
                 return;

@@ -1,5 +1,7 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 
 namespace WPF6Fundamentals.ViewModel
 {
@@ -10,5 +12,6 @@ namespace WPF6Fundamentals.ViewModel
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        public virtual Task LoadAsync() => Task.CompletedTask;
     }
 }

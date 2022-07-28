@@ -11,6 +11,15 @@
     <UserControl.Resources>
         <converter:NavigationSideToGridColumnConverter 
             x:Key="NavigationSideToGridColumnConv"/>
+        
+        <DataTemplate x:Key="CustomerDataTemplate">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding FirstName}"
+                                       FontWeight="Bold"/>
+                <TextBlock Text="{Binding LastName}"
+                                       Margin="5,0,0,0"/>
+            </StackPanel>
+        </DataTemplate>
     </UserControl.Resources>
     
     <Grid>
@@ -23,7 +32,8 @@
         <!--Customer List-->
         <Grid Grid.Column="{Binding NavigationSide, 
               Converter={StaticResource NavigationSideToGridColumnConv}}"
-              Background="#777">
+              Background="#777"
+              Width="260">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition/>
@@ -50,8 +60,7 @@
                       Margin="10,0,10,10"
                       SelectedItem="{Binding SelectedCustomer, Mode=TwoWay}"
                       ItemsSource="{Binding Customers}"
-                      DisplayMemberPath="FirstName"/>
-
+                      ItemTemplate="{StaticResource CustomerDataTemplate}"/>
         </Grid>
 
         <!--Customer Detail-->
