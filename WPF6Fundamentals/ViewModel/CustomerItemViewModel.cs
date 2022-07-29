@@ -2,7 +2,7 @@
 
 namespace WPF6Fundamentals.ViewModel
 {
-    public class CustomerItemViewModel : ViewModelBase
+    public class CustomerItemViewModel : ValidationViewModelBase
     {
         private readonly Customer _model;
 
@@ -18,6 +18,14 @@ namespace WPF6Fundamentals.ViewModel
             { 
                 _model.FirstName = value;
                 RaisePropertyChanged();
+                if (string.IsNullOrEmpty(_model.FirstName))
+                {
+                    AddError("Firstname is required");
+                }
+                else
+                {
+                    ClearErrors();
+                }
             }
         }
         public string? LastName
